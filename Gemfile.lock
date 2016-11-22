@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    simple-navigation-acl (0.0.1)
+      haml
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    haml (4.0.7)
+      tilt
+    tilt (2.0.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  simple-navigation-acl!
+
+BUNDLED WITH
+   1.13.1

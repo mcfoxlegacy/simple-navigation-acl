@@ -1,0 +1,1 @@
+Rails.application.config.assets.precompile += %w( simple_navigation_acl.js simple_navigation_acl.css  )

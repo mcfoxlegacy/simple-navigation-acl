@@ -1,0 +1,21 @@
+- @permissions.each do |context, navs|
+  %fieldset.simple_navigation_acl_fieldset
+    %legend= context.to_s.humanize
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th Menu
+          %th Permitir?
+      %tbody
+        - navs.each do |nav|
+          - next if nav[:key].to_s =~ /^divider/
+          %tr
+            %td
+              - nav_level = (nav[:level].to_i-1)
+              = "|" if nav_level >= 1
+              = "---" * (nav[:level].to_i-1)
+              = nav[:name]
+            %td
+              %label.simple_navigation_acl_switch
+                %input{type: 'checkbox'}
+                .simple_navigation_acl_slider.round
