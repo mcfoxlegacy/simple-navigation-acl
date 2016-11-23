@@ -26,8 +26,51 @@ Add it to your **app/assets/javascripts/application.js**
 //= require simple_navigation_acl
 ```
 
-## Dependency
+Modify simple-navigation helper `render_navigation` in your views to simple-navigation-acl helper `render_navigation_acl` and add param `acl_id`, like:
+```haml
+= render_navigation_acl acl_id: current_user.role, level:(1..3), :renderer => :bootstrap3, :expand_all => true
+```
 
+## ID and CONTEXT
+
+The simple-navigation-acl have id and [context](https://github.com/codeplant/simple-navigation/wiki/Configuration) to create rules for you:
+
+Example for roles:
+
+**config/navigation.rb**
+
+```ruby
+SimpleNavigation::Configuration.run do |navigation|
+  navigation.items do |primary|
+    primary.item :menu1, "Menu 1", root_path do |sub_nav|
+      sub_nav.item :sub_menu1, 'Sub Menu1', root_path
+    end
+  end
+end
+```
+
+**config/admin_navigation.rb**
+
+```ruby
+SimpleNavigation::Configuration.run do |navigation|
+  navigation.items do |primary|
+    primary.item :adm_menu1, "Admin Menu 1", root_path do |sub_nav|
+      sub_nav.item :adm_sub_menu1, 'Admin Sub Menu1', root_path
+    end
+  end
+end
+```
+
+**table acl_rules**
+
+id | context | key
+--- | --- | ---
+admin | default | :menu1
+admin | default | :sub_menu1
+admin | admin | :adm_menu1
+admin | admin | :adm_sub_menu1
+user | default | :menu1
+...
 
 ## Routes
 
@@ -56,26 +99,52 @@ Or a String like `@role = 'admin'` then:
 
 And to save via HTTP PATCH, PUT or POST, like:
 ```haml
-  = form_tag simple_navigation_acl_save_path(@resource), method: :put
+= form_tag simple_navigation_acl_save_path(@resource), method: :put
     
 ```
 
-### Example
+### Example Form for ACL by Roles
 
 ```haml
 .row
   .col-md-12
     %table.table.table-hover{style: 'width: auto'}
       %tr
-        %th Perfil
+        %th Roles
         %th
-      - [:admin, :gestor, :superior, :analista].each do |role|
+      - [:admin, :user].each do |role|
         %tr
           %td= role
           %td
-            = link_to 'Editar', simple_navigation_acl_edit_path(id: role)
+            = link_to 'Edit', simple_navigation_acl_edit_path(id: role)
             \|
-            = link_to 'Exibir', simple_navigation_acl_show_path(id: role)
+            = link_to 'Edit', simple_navigation_acl_show_path(id: role)
+```
+
+```haml
+= render_navigation_acl acl_id: current_user.role
+```
+
+### Example Form for ACL by User
+
+```haml
+.row
+  .col-md-12
+    %table.table.table-hover{style: 'width: auto'}
+      %tr
+        %th Roles
+        %th
+      - User.all.each do |user|
+        %tr
+          %td= role
+          %td
+            = link_to 'Edit', simple_navigation_acl_edit_path(user)
+            \|
+            = link_to 'Edit', simple_navigation_acl_show_path(user)
+```
+
+```haml
+= render_navigation_acl acl_id: current_user.id
 ```
 
 ## Bug reports
