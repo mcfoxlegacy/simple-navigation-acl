@@ -1,0 +1,1 @@
+#SimpleNavigationAcl::Base.contexts += %w(admin)

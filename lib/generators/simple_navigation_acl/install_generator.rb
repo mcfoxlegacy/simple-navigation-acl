@@ -23,6 +23,10 @@ module SimpleNavigationAcl
         migration_template 'create_acl_rules.rb', 'db/migrate/create_acl_rules.rb'
       end
 
+      def copy_initializer
+        copy_file 'initializer.rb', 'config/initializers/simple_navigation_acl.rb'
+      end
+
       def copy_locales
         directory File.expand_path("../../../../config/locales", __FILE__), 'config/locales'
       end

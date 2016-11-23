@@ -11,5 +11,3 @@ module SimpleNavigationAcl
 
   end
 end
-
-
