@@ -1,4 +1,4 @@
-- unless nav.nil? && nav[:key].to_s =~ /^divider/
+- unless nav.nil? || nav[:key].to_s =~ /^divider/
   %li.acl_tree_item
     - rules = [] if rules.nil?
     - readonly = true if readonly.nil?
