@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple-navigation-acl (0.0.1)
+    simple-navigation-acl (0.1.0)
       haml
 
 GEM
