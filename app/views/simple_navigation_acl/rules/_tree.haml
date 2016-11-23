@@ -1,0 +1,3 @@
+%ul.acl_tree
+  - navs.each do |nav|
+    = render partial: 'simple_navigation_acl/rules/tree_item', locals: {nav: nav, rules: rules}

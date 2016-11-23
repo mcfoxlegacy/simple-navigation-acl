@@ -1,8 +1,8 @@
-= form_tag simple_navigation_acl_save_path, method: :put do
+= form_tag simple_navigation_acl_save_path do
   - SimpleNavigationAcl::Base.contexts.each do |context|
     - navs = navigations_from_context(context)
     %fieldset.simple_navigation_acl_fieldset
       %legend= context.to_s.humanize
-      = show_navigation_tree(navs)
+      = show_navigation_tree(navs, @rules)
 
   = submit_tag :save

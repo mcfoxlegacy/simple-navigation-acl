@@ -13,6 +13,7 @@ Run the following command to install it:
 ```sh
 $ bundle install
 $ rails generate simple_navigation_acl:install
+$ rake db:migrate
 ```
 
 Add it to your **app/assets/stylesheets/application.css**
@@ -26,6 +27,38 @@ Add it to your **app/assets/javascripts/application.js**
 ```
 
 ## Dependency
+
+
+## Routes
+
+**Edit Acl Rules**
+
+You can bind acl rule on resource, doesn't matter what resource it is.
+Only pass `id` to the route and it will be binded.
+
+```ruby
+@resource = User.first
+# or
+@resource = Role.last
+# or
+@resource = Wherever.find_by(id: 1)
+```
+
+```haml
+= link_to 'Edit', simple_navigation_acl_edit_path(@resource)
+= link_to 'Show', simple_navigation_acl_show_path(@resource)
+```
+
+Or a String like `@role = 'admin'` then:
+```haml
+= link_to 'Edit', simple_navigation_acl_edit_path(id: @role)
+```
+
+And to save via HTTP PATCH, PUT or POST, like:
+```haml
+  = form_tag simple_navigation_acl_save_path(@resource), method: :put
+    
+```
 
 ### Example
 

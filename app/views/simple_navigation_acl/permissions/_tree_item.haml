@@ -1,5 +1,0 @@
-- unless nav[:key].to_s =~ /^divider/
-  %li.acl_tree_item
-    %input{type: 'checkbox', name: "acl_item[#{nav[:context]}][]", id: nav[:key], value: nav[:key]}
-    %label{for: nav[:key]}= nav[:name]
-    = show_navigation_tree(nav[:items]) if nav.key?(:items)
