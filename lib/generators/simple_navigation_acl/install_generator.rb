@@ -27,6 +27,10 @@ module SimpleNavigationAcl
         directory File.expand_path("../../../../config/locales", __FILE__), 'config/locales'
       end
 
+      def copy_views
+        directory File.expand_path("../../../../app/views/simple_navigation_acl/rules", __FILE__), 'app/views/simple_navigation_acl/rules'
+      end
+
     end
 
   end

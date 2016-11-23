@@ -1,15 +1,12 @@
 module SimpleNavigationAcl
   class RulesController < ApplicationController
 
-    after_filter :save_acl_previous_url, only: [:edit, :show]
+    before_action :set_rule, only: [:edit, :show]
 
     def edit
-      @resource_id = params[:id]
-      @rules = SimpleNavigationAcl::AclRule.where(id: @resource_id).pluck(:context, :key)
     end
 
     def show
-      @resource_id = params[:id]
     end
 
     def update
@@ -32,7 +29,7 @@ module SimpleNavigationAcl
       respond_to do |format|
         if errors.blank?
           flash[:notice] = I18n.t(:save, scope: [:simple_navigation_acl, :messages])
-          format.html { redirect_to session[:acl_previous_url] }
+          format.html { redirect_to simple_navigation_acl_show_path(id: resource_id) }
           format.json { render json: acl_item, status: :ok, location: simple_navigation_acl_show_path(id: resource_id) }
         else
           flash[:error] = errors.join(', ')
@@ -43,9 +40,9 @@ module SimpleNavigationAcl
     end
 
     private
-    def save_acl_previous_url
-      # session[:previous_url] is a Rails built-in variable to save last url.
-      session[:acl_previous_url] = URI(request.referer || '').path
+    def set_rule
+      @id = params[:id]
+      @rules = SimpleNavigationAcl::AclRule.where(id: @id).pluck(:context, :key)
     end
 
   end

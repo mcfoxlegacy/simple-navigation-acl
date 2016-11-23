@@ -1,0 +1,11 @@
+<h1>Edit ACL</h1>
+
+<%= form_tag simple_navigation_acl_save_path do %>
+    <%= render 'simple_navigation_acl/form' %>
+    <hr />
+    <%= submit_tag 'Save' %>
+    or
+    <%= link_to 'Back', :back %>
+    |
+    <%= link_to 'Show', simple_navigation_acl_edit_path(id: @id) %>
+<% end %>

@@ -2,65 +2,57 @@
 *= require_self
 */
 
-.simple_navigation_acl_fieldset table tr td {
-    font-size: 16px
-}
-
-
-.simple_navigation_acl_switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.simple_navigation_acl_switch input {display:none;}
-
-/* The slider */
-.simple_navigation_acl_slider {
-    position: absolute;
+ul.acl_tree label {
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
 }
 
-.simple_navigation_acl_slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+ul.acl_tree,
+ul.acl_tree ul.acl_tree {
+    margin:0 0 0 1em; /* indentation */
+    padding:0;
+    list-style:none;
+    position:relative;
 }
 
-input:checked + .simple_navigation_acl_slider {
-    background-color: #21F396;
+ul.acl_tree ul.acl_tree {margin-left:.5em} /* (indentation/2) */
+
+ul.acl_tree:before,
+ul.acl_tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left: 1px solid;
+    color: #C5C5C5;
 }
 
-input:focus + .simple_navigation_acl_slider {
-    box-shadow: 0 0 1px #21F396;
+ul.acl_tree li.acl_tree_item {
+    margin:0;
+    padding:0 1.5em; /* indentation + .5em */
+    line-height:2em; /* default list item's `line-height` */
+    font-weight:bold;
+    position:relative;
 }
 
-input:checked + .simple_navigation_acl_slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+ul.acl_tree li.acl_tree_item:before {
+    content:"";
+    display:block;
+    width:10px; /* same with indentation */
+    height:0;
+    border-top:1px solid;
+    margin-top:-2px; /* border top width */
+    position:absolute;
+    top:1em; /* (line-height/2) */
+    left:0;
+    color: #C5C5C5;
 }
 
-/* Rounded sliders */
-.simple_navigation_acl_slider.round {
-    border-radius: 34px;
-}
-
-.simple_navigation_acl_slider.round:before {
-    border-radius: 50%;
+ul.acl_tree li.acl_tree_item:last-child:before {
+    background:white; /* same with body background */
+    height:auto;
+    top:1em; /* (line-height/2) */
+    bottom:0;
 }
