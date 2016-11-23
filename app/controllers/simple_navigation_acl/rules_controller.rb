@@ -28,7 +28,7 @@ module SimpleNavigationAcl
 
       respond_to do |format|
         if errors.blank?
-          flash[:notice] = I18n.t(:save, scope: [:simple_navigation_acl, :messages])
+          flash[:notice] = I18n.t(:save, default: ['Save Successfully'], scope: [:simple_navigation_acl, :messages])
           format.html { redirect_to simple_navigation_acl_show_path(id: resource_id) }
           format.json { render json: acl_item, status: :ok, location: simple_navigation_acl_show_path(id: resource_id) }
         else

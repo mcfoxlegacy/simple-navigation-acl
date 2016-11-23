@@ -34,32 +34,23 @@ module SimpleNavigationAcl
       end
 
       def apply_acl(navigation, id, context)
-
-        container = navigation.is_a?(SimpleNavigation::Configuration) ? navigation.instance_variable_get(:@primary_navigation) : navigation
+        context=:default if context.nil?
         rules_keys = SimpleNavigationAcl::AclRule.where(id: id, context: context).pluck(:key)
+        container = navigation.is_a?(SimpleNavigation::Configuration) ? navigation.instance_variable_get(:@primary_navigation) : navigation
         filter_simple_navigation_with_rules!(container, rules_keys)
-
-        #SimpleNavigation::ItemContainer . @items [SimpleNavigation::Item . @key, @sub_navigation [SimpleNavigation::ItemContainer] ]
-        #SimpleNavigation::Configuration . @primary_navigation (SimpleNavigation::ItemContainer)
-
-
-        # navs = get_nav_items(navigation.primary_navigation, context)
-        # rules = SimpleNavigationAcl::AclRule.where(id: id, context: context)
-        # raise navs.inspect
+        true
       end
 
       def filter_simple_navigation_with_rules!(simple_navigation_item_container, keys)
-        items = simple_navigation_item_container.instance_variable_get(:@items)
-        items.each_with_index do |simple_vavigation_item, index|
-          key = simple_vavigation_item.instance_variable_get(:@key)
-          if keys.include?(key.to_s)
-            sub_navigation = simple_vavigation_item.instance_variable_get(:@sub_navigation)
-            filter_simple_navigation_with_rules!(sub_navigation, keys) if sub_navigation.present?
+        simple_navigation_item_container.items.delete_if do |simple_navigation_item|
+          if keys.include?(simple_navigation_item.key.to_s)
+            sub_navigation = simple_navigation_item.sub_navigation
+            filter_simple_navigation_with_rules!(sub_navigation, keys) if sub_navigation
+            false
           else
-            items.delete_at(index)
+            true
           end
         end
-        # simple_navigation_item_container.instance_variable_set(:@items, 5)
       end
 
       private
