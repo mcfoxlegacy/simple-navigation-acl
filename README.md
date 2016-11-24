@@ -28,7 +28,12 @@ Add it to your **app/assets/javascripts/application.js**
 
 Modify simple-navigation helper `render_navigation` in your views to simple-navigation-acl helper `render_navigation_acl` and add param `acl_id`, like:
 ```haml
-= render_navigation_acl acl_id: current_user.role, level:(1..3), :renderer => :bootstrap3, :expand_all => true
+= render_navigation_acl acl_id: current_user.role
+```
+
+If you need to see all navigations like a Super Admin, pass `:all` to **acl_id**:
+```haml
+= render_navigation_acl acl_id: :all
 ```
 
 

@@ -35,9 +35,10 @@ module SimpleNavigationAcl
 
       def apply_acl(navigation, id, context)
         context=:default if context.nil?
-        rules_keys = SimpleNavigationAcl::AclRule.where(id: id, context: context).pluck(:key)
+        rules_keys = SimpleNavigationAcl::AclRule.where(context: context)
+        rules_keys = rules_keys.where(id: id) unless id==:all
         container = navigation.is_a?(SimpleNavigation::Configuration) ? navigation.instance_variable_get(:@primary_navigation) : navigation
-        filter_simple_navigation_with_rules!(container, rules_keys)
+        filter_simple_navigation_with_rules!(container, rules_keys.pluck(:key))
         true
       end
 
