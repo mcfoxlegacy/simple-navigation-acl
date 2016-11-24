@@ -9,9 +9,11 @@
               <span>&#10004;</span>
           <% end %>
       <% else %>
-          <input class="acl_tree_checkbox" type="checkbox" name="acl_item[<%= nav[:context] %>][]" id="<%= nav_id %>" value="<%= nav[:key] %>" checked="<%= checked %>" />
-          <label for="<%= nav_id %>"><%= nav[:name] %></label>
-          <%= show_navigation_tree(nav[:items], rules, readonly: readonly) if nav.key?(:items) %>
+          <input class="acl_tree_checkbox" type="checkbox" name="acl_item[<%= nav[:context] %>][]" id="<%= nav_id %>" value="<%= nav[:key] %>" <%= checked ? 'checked' : '' %> />
+      <% end %>
+      <label for="<%= nav_id %>"><%= nav[:name] %></label>
+      <% if nav.key?(:items) %>
+          <%= show_navigation_tree(nav[:items], rules, readonly: readonly) %>
       <% end %>
     </li>
 <% end %>
