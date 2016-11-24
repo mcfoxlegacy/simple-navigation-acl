@@ -6,7 +6,7 @@ A great and easy condition builder to your rails project
 
 Add it to your **Gemfile**: 
 ```ruby
-gem 'simple_navigation_acl'
+gem 'simple-navigation-acl'
 ```
 
 Run the following command to install it:
