@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple-navigation-acl (0.1.2)
+    simple-navigation-acl (0.1.3)
 
 GEM
   remote: https://rubygems.org/
