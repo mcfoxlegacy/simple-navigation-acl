@@ -1,0 +1,17 @@
+<% unless nav.nil? || nav[:key].to_s =~ /^divider/ %>
+    <li class="acl_tree_item">
+      <% rules = [] if rules.nil? %>
+      <% readonly = true if readonly.nil? %>
+      <% nav_id = "#{nav[:context]}_#{nav[:key]}" %>
+      <% checked = rules.include?([nav[:context].to_s, nav[:key].to_s]) %>
+      <% if readonly %>
+          <% if checked %>
+              <span>&#10004;</span>
+          <% end %>
+      <% else %>
+          <input class="acl_tree_checkbox" type="checkbox" name="acl_item[<%= nav[:context] %>][]" id="<%= nav_id %>" value="<%= nav[:key] %>" checked="<%= checked %>" />
+          <label for="<%= nav_id %>"><%= nav[:name] %></label>
+          <%= show_navigation_tree(nav[:items], rules, readonly: readonly) if nav.key?(:items) %>
+      <% end %>
+    </li>
+<% end %>

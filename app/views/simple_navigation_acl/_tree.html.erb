@@ -1,0 +1,8 @@
+<ul class="acl_tree">
+  <% navs = [] if navs.nil? %>
+  <% rules = [] if rules.nil? %>
+  <% readonly = true if readonly.nil? %>
+  <% navs.each do |nav| %>
+      <%= render partial: 'simple_navigation_acl/tree_item', locals: {nav: nav, rules: rules, readonly: readonly} %>
+  <% end %>
+</ul>
