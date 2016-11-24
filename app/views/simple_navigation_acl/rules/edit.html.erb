@@ -1,11 +1,13 @@
-<h1>Edit ACL</h1>
+<h1>Edit ACL of #<%= @id %></h1>
 
 <%= form_tag simple_navigation_acl_save_path do %>
-    <%= render 'simple_navigation_acl/form' %>
+    <% SimpleNavigationAcl::Base.contexts.each do |context| %>
+      <%= render 'simple_navigation_acl/list', context: context %>
+    <% end %>
     <hr />
     <%= submit_tag 'Save' %>
     or
     <%= link_to 'Back', :back %>
     |
-    <%= link_to 'Show', simple_navigation_acl_edit_path(id: @id) %>
+    <%= link_to 'Show', simple_navigation_acl_show_path(id: @id) %>
 <% end %>

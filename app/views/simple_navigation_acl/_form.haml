@@ -1,6 +1,0 @@
-- readonly=false if readonly.nil?
-- SimpleNavigationAcl::Base.contexts.each do |context|
-  - navs = navigations_from_context(context)
-  %fieldset.simple_navigation_acl_fieldset
-    %legend= context.to_s.humanize
-    = show_navigation_tree(navs, @rules, readonly: readonly)

@@ -1,6 +1,8 @@
-<h1>Show ACL</h1>
+<h1>Show ACL of #<%= @id %></h1>
 
-<%= render 'simple_navigation_acl/form', readonly: true %>
+<% SimpleNavigationAcl::Base.contexts.each do |context| %>
+    <%= render 'simple_navigation_acl/list', context: context, readonly: true %>
+<% end %>
 
 <hr />
 

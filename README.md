@@ -31,6 +31,7 @@ Modify simple-navigation helper `render_navigation` in your views to simple-navi
 = render_navigation_acl acl_id: current_user.role, level:(1..3), :renderer => :bootstrap3, :expand_all => true
 ```
 
+
 ## ID and CONTEXT
 
 The simple-navigation-acl have id and [context](https://github.com/codeplant/simple-navigation/wiki/Configuration) to create rules for you:
@@ -102,6 +103,20 @@ And to save via HTTP PATCH, PUT or POST, like:
 = form_tag simple_navigation_acl_save_path(@resource), method: :put
     
 ```
+
+### Editing default views
+
+On install is created two views: **edit** and **show**
+
+In `views/simple_navigation_acl/show.html.erb`:
+```html
+<% SimpleNavigationAcl::Base.contexts.each do |context| %>
+    <%= render 'simple_navigation_acl/list', context: context, readonly: true %>
+<% end %>
+```
+You can List all navigations contexts with `SimpleNavigationAcl::Base.contexts` and can render only permissions list with: `render 'simple_navigation_acl/list', context: context`
+By default `context=:default` and `readonly=false` (readonly define if permissiosn list is editable or not) 
+
 
 ### Example Form for ACL by Roles
 
