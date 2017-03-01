@@ -1,6 +1,6 @@
 # Simple Navigation Acl 
 
-A great and easy condition builder to your rails project
+Plugin for working with ACLs on Simple Navigation
 
 ## How to install
 
